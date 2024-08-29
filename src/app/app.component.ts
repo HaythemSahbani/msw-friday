@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'msw-friday';
+  http = inject(HttpClient);
+  pokemon$!: Observable<any>;
+
+  fetchPokemon(value: string) {
+    this.pokemon$ = this.http.get(`https://pokeapi.co/api/v2/pokemon/${value}`);
+  }
 }

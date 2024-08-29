@@ -1,15 +1,14 @@
 <h1>Load pokemon</h1>
 
 <div>
-  <label for="poke_inpout"
+  <label for="input"
     >type in the pokemon id <br />
     choose a number greater than 1
   </label>
+  <br>
   <input
     #input
     (input)="fetchPokemon(input.value)"
-    type="text"
-    id="poke_input"
   />
 </div>
 

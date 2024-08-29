@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,7 @@ export class AppComponent {
   pokemon$!: Observable<any>;
 
   fetchPokemon(value: string) {
-    this.pokemon$ = this.http.get(`https://pokeapi.co/api/v2/pokemon/${value}`);
+    this.pokemon$ = this.http.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
+      .pipe(catchError(error => of(error)));
   }
 }
